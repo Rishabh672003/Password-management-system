@@ -25,7 +25,7 @@ int add_data() {
     for (;;) {
         while (str_length(password) < 8) {
             printf("\n Your Password is too short \n");
-            printf("Enter Password again - ");
+            printf("Enter Password again -%s", password);
             scanf("%s", password);
         }
         break;
@@ -41,22 +41,23 @@ int output() {
 }
 
 int output_to_file() {
+    FILE *file_ptr_w = fopen("/home/rishabh/Downloads/password.txt", "w+");
     FILE *file_ptr = fopen("/home/rishabh/projects/password.txt", "a");
     if (file_ptr == NULL) {
         puts("this file doesnt exist");
         printf("create the file");
     }
-    fprintf(file_ptr, "Site - %s\n", website_name);
-    fprintf(file_ptr, "password - %s\n", password);
+    fprintf(file_ptr, "Site-%s\n", website_name);
+    fprintf(file_ptr, "password-%s\n", password);
     fclose(file_ptr);
     return 0;
 }
 
 int scan_from_file() {
-    FILE *file_ptr = fopen("/home/rishabh/projects/password.txt", "r");
+    FILE *file_ptr = fopen("/home/rishabh/Downloads/password.txt", "r");
     char buff[255]; // creating char array to store data of file  
-    while (fscanf(file_ptr, "%s", buff) != EOF) {
-        printf("%s\n ", buff);
+    while (fscanf(file_ptr, "\n%s", buff) != EOF) {
+        printf("%s\n", buff);
     }
     fclose(file_ptr);
     return 0;
@@ -66,7 +67,6 @@ int pass_man() {
     add_data();
     output();
     output_to_file();
-    // scan_from_file();
     return 0;
 }
 
@@ -80,6 +80,7 @@ int main() {
     printf("this is a password management system which will store the username "
            "and password");
     int add_more;
+    pass_man();
     printf("\nEnter 1 if you want to add more passwords and 2 if you want to "
            "exit - ");
     scanf("%i", &add_more);
@@ -88,11 +89,11 @@ int main() {
         case 1:
             pass_man();
             break;
-        default:
+        case 2:
             printf("\n\tHope this software was useful to you");
             break;
         case 3:
-            // scan_from_file();
+            scan_from_file();
             break;
         }
         break;
