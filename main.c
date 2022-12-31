@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+// initialize the variables
 char website_name[100], website_name2[100];
 char password[100];
 
@@ -17,6 +18,7 @@ int str_length(char str[]) {
     return count;
 }
 
+// function to get the data
 void add_data() {
     printf("\nEnter the site name - ");
     scanf("%99s", website_name);
@@ -30,14 +32,15 @@ void add_data() {
         }
         break;
     }
-    system("clear");
 }
 
+// output the data recieved in stdout
 void output() {
     printf("The password of %s is - ", website_name);
     printf("The site name is %s and its password is %s.", website_name, password);
 }
 
+// store the data in the file using fprintf
 void output_to_file() {
     FILE *file_ptr_w = fopen("/home/rishabh/Downloads/password.txt", "w+");
     FILE *file_ptr = fopen("/home/rishabh/projects/password.txt", "a");
@@ -45,11 +48,12 @@ void output_to_file() {
         puts("this file doesnt exist");
         printf("create the file");
     }
-    fprintf(file_ptr, "Site-%s\n", website_name);
-    fprintf(file_ptr, "password-%s\n", password);
+    fprintf(file_ptr, "Site - %s\n", website_name);
+    fprintf(file_ptr, "password - %s\n", password);
     fclose(file_ptr);
 }
 
+// read the data from the file
 void scan_from_file() {
     FILE *file_ptr = fopen("/home/rishabh/Downloads/password.txt", "r");
     char buff[255]; // creating char array to store data of file  
@@ -59,10 +63,26 @@ void scan_from_file() {
     fclose(file_ptr);
 }
 
+// execute the previous functions
 void pass_man() {
     add_data();
+    // should be cls instead of clear for windows
+    system("clear");
     output();
-    output_to_file();
+}
+
+void save_to_file() {
+    printf("Do you want to save your password to the file?");
+    puts("If yes write 1 - ");
+    int add_file;
+    scanf("%i", &add_file);
+    switch (add_file) {
+    case 1:
+        output_to_file();
+        break;
+    default:
+        break;
+    };
 }
 
 int main() {
@@ -74,25 +94,19 @@ int main() {
         "-------------------------------------------------------------------\n");
     printf("this is a password management system which will store the username "
            "and password");
-    int add_more;
     pass_man();
-    printf("\nEnter 1 if you want to add more passwords and 2 if you want to "
-           "exit - ");
-    scanf("%i", &add_more);
-    for (;;) {
-        switch (add_more) {
-        case 1:
+    while (1) {
+        int add_more;
+        printf("\nEnter 1 if you want to add more passwords and 2 if you want to "
+               "exit - ");
+        scanf("%i", &add_more);
+        if (add_more == 1) {
             pass_man();
-            break;
-        case 2:
-            printf("\n\tHope this software was useful to you");
-            break;
-        case 3:
-            scan_from_file();
-            break;
+            continue;
         }
         break;
     }
-    scan_from_file();
+    save_to_file();
+    // scan_from_file();
     return 0;
 }
