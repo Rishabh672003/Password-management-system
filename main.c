@@ -31,17 +31,31 @@ int add_data() {
         }
         break;
     }
-    return 0;
-}
-
-int output_file() {
-    FILE *file_ptr = fopen("/home/rishabh/projects/password.txt", "a");
+    system("clear");
     return 0;
 }
 
 int output() {
     printf("The password of %s is - ", website_name);
     printf("The site name is %s and its password is %s.", website_name, password);
+    return 0;
+}
+
+int output_file() {
+    FILE *file_ptr = fopen("/home/rishabh/projects/password.txt", "a");
+    if (file_ptr == NULL) {
+        puts("this file doesnt exist");
+        printf("crate the file");
+    }
+    fprintf(file_ptr, "%s", website_name);
+    fprintf(file_ptr, "%s", password);
+    return 0;
+}
+
+int pass_man() {
+    add_data();
+    output();
+    output_file();
     return 0;
 }
 
@@ -54,9 +68,7 @@ int main() {
         "-------------------------------------------------------------------\n");
     printf("this is a password management system which will store the username "
            "and password");
-
-    add_data();
-    output();
+    pass_man();
     system("clear");
     int add_more;
     printf("\nEnter 1 if you want to add more passwords and 2 if you want to "
@@ -65,8 +77,7 @@ int main() {
     for (;;) {
         switch (add_more) {
         case 1:
-            add_data();
-            output();
+            pass_man();
             break;
         case 2:
             printf("\n\tHope you enjoyed it! STAY SAFE");
