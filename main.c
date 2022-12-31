@@ -17,7 +17,7 @@ int str_length(char str[]) {
     return count;
 }
 
-int add_data() {
+void add_data() {
     printf("\nEnter the site name - ");
     scanf("%99s", website_name);
     printf("\nEnter the password - ");
@@ -31,16 +31,14 @@ int add_data() {
         break;
     }
     system("clear");
-    return 0;
 }
 
-int output() {
+void output() {
     printf("The password of %s is - ", website_name);
     printf("The site name is %s and its password is %s.", website_name, password);
-    return 0;
 }
 
-int output_to_file() {
+void output_to_file() {
     FILE *file_ptr_w = fopen("/home/rishabh/Downloads/password.txt", "w+");
     FILE *file_ptr = fopen("/home/rishabh/projects/password.txt", "a");
     if (file_ptr == NULL) {
@@ -50,24 +48,21 @@ int output_to_file() {
     fprintf(file_ptr, "Site-%s\n", website_name);
     fprintf(file_ptr, "password-%s\n", password);
     fclose(file_ptr);
-    return 0;
 }
 
-int scan_from_file() {
+void scan_from_file() {
     FILE *file_ptr = fopen("/home/rishabh/Downloads/password.txt", "r");
     char buff[255]; // creating char array to store data of file  
     while (fscanf(file_ptr, "\n%s", buff) != EOF) {
         printf("%s\n", buff);
     }
     fclose(file_ptr);
-    return 0;
 }
 
-int pass_man() {
+void pass_man() {
     add_data();
     output();
     output_to_file();
-    return 0;
 }
 
 int main() {
