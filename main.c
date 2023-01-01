@@ -25,7 +25,7 @@ void add_data() {
     printf("\nEnter the password - ");
     scanf("\n%99s", password);
     for (;;) {
-        while (str_length(password) < 8) {
+        while (str_length(password) < 4) {
             printf("\n Your Password is too short \n");
             printf("Enter Password again -%s", password);
             scanf("%s", password);
@@ -36,8 +36,8 @@ void add_data() {
 
 // output the data recieved in stdout
 void output() {
-    printf("The password of %s is - ", website_name);
-    printf("The site name is %s and its password is %s.", website_name, password);
+    printf("The Site name is - %s\n", website_name);
+    printf("The password is - %s\n", password);
 }
 
 // store the data in the file using fprintf
@@ -63,6 +63,23 @@ void scan_from_file() {
     fclose(file_ptr);
 }
 
+void file() {
+    printf("\nDo you want to save your password to the file or read your "
+           "password from the file?");
+    printf("\nFor write write 1 and for read write 2 - ");
+    int add_file;
+    scanf("%i", &add_file);
+    switch (add_file) {
+    case 1:
+        output_to_file();
+        break;
+    case 2:
+        scan_from_file();
+    default:
+        break;
+    };
+}
+
 // execute the previous functions
 void pass_man() {
     add_data();
@@ -71,18 +88,18 @@ void pass_man() {
     output();
 }
 
-void save_to_file() {
-    printf("Do you want to save your password to the file?");
-    puts("If yes write 1 - ");
-    int add_file;
-    scanf("%i", &add_file);
-    switch (add_file) {
-    case 1:
-        output_to_file();
+void inf_loop_add_more() {
+    while (1) {
+        int add_more;
+        printf("\nEnter 1 if you want to add more passwords and 2 if you want to "
+               "exit - ");
+        scanf("%i", &add_more);
+        if (add_more == 1) {
+            pass_man();
+            continue;
+        }
         break;
-    default:
-        break;
-    };
+    }
 }
 
 int main() {
@@ -95,18 +112,7 @@ int main() {
     printf("this is a password management system which will store the username "
            "and password");
     pass_man();
-    while (1) {
-        int add_more;
-        printf("\nEnter 1 if you want to add more passwords and 2 if you want to "
-               "exit - ");
-        scanf("%i", &add_more);
-        if (add_more == 1) {
-            pass_man();
-            continue;
-        }
-        break;
-    }
-    save_to_file();
-    // scan_from_file();
+    inf_loop_add_more();
+    file();
     return 0;
 }
