@@ -63,26 +63,6 @@ void scan_from_file() {
     fclose(file_ptr_r);
 }
 
-void file() {
-    printf("\nDo you want to save your password to the file or read your "
-           "password from the file?");
-    printf("\nFor write enter 1 and for read enter 2 - ");
-    system("clear");
-    int add_file;
-    scanf("%i", &add_file);
-    switch (add_file) {
-    case 1:
-        output_to_file();
-        break;
-    case 2:
-        scan_from_file();
-        break;
-    default:
-        printf("Invalid Choice");
-        break;
-    };
-}
-
 // execute the previous functions
 void pass_man() {
     add_data();
@@ -135,6 +115,5 @@ int main() {
         printf("Invalid Choice");
         break;
     }
-    // file();
     return 0;
 }
