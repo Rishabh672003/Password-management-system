@@ -8,14 +8,10 @@ char user_name[100];
 char password[100];
 
 int str_length(char str[]) {
-    // initializing count variable (stores the length of the string)
     int count;
-
     // incrementing the count till the end of the string
     for (count = 0; str[count] != '\0'; ++count)
         ;
-
-    // returning the character count of the string
     return count;
 }
 
@@ -23,7 +19,7 @@ int str_length(char str[]) {
 void add_data() {
     printf("\nEnter the site name - ");
     scanf("%99s", website_name);
-    printf("\nEnter the User name - ");
+    printf("Enter the User name - ");
     scanf("%s", user_name);
     printf("Enter the password - ");
     scanf("\n%99s", password);
@@ -41,49 +37,37 @@ void add_data() {
 void output() {
     printf("The Site name is - %s\n", website_name);
     printf("The User name is - %s\n", user_name);
-    printf("The password is - %s", password);
+    printf("The password is - %s\n", password);
 }
 
 // store the data in the file using fprintf
 void output_to_file() {
-    FILE *file_ptr_w = fopen("/home/rishabh/Downloads/password.txt", "w+");
-    FILE *file_ptr_a = fopen("/home/rishabh/projects/password.txt", "a");
-    if (file_ptr_w == NULL) {
+    FILE *file_ptr_a = fopen("/home/rishabh/Downloads/password.txt", "a");
+    if (file_ptr_a == NULL) {
         puts("this file doesnt exist");
         printf("create the file");
     }
-    fprintf(file_ptr_a, "Site - %s\n", website_name);
-    fprintf(file_ptr_a, "password - %s\n", password);
+    fprintf(file_ptr_a, "\nSite-%s\n", website_name);
+    fprintf(file_ptr_a, "Username-%s\n", user_name);
+    fprintf(file_ptr_a, "Password-%s\n", password);
     fclose(file_ptr_a);
-    fclose(file_ptr_w);
 }
 
 // read the data from the file
 void scan_from_file() {
-    // FILE *file_ptr_r = fopen("/home/rishabh/Downloads/password.txt", "r");
-    // char buff[255]; // creating char array to store data of file  
-    // while (fscanf(file_ptr_r, "\n%s", buff) != EOF) {
-    //     printf("%s\n", buff);
-    // }
-    // fclose(file_ptr_r);
-    FILE *ptr;
-    char ch;
-    ptr = fopen("/home/rishabh/Downloads/password.txt", "r");
-    if (NULL == ptr) {
-        printf("file can't be opened \n");
+    FILE *file_ptr_r = fopen("/home/rishabh/Downloads/password.txt", "r");
+    char buff[255]; // creating char array to store data of file  
+    while (fscanf(file_ptr_r, "\n%s", buff) != EOF) {
+        printf("%s\n", buff);
     }
-    printf("content of this file are \n");
-    do {
-        ch = fgetc(ptr);
-        printf("%c", ch);
-    } while (ch != EOF);
-    fclose(ptr);
+    fclose(file_ptr_r);
 }
 
 void file() {
     printf("\nDo you want to save your password to the file or read your "
            "password from the file?");
     printf("\nFor write enter 1 and for read enter 2 - ");
+    system("clear");
     int add_file;
     scanf("%i", &add_file);
     switch (add_file) {
@@ -92,6 +76,7 @@ void file() {
         break;
     case 2:
         scan_from_file();
+        break;
     default:
         printf("Invalid Choice");
         break;
@@ -143,6 +128,7 @@ int main() {
         inf_loop_add_more();
         break;
     case 2:
+        printf("\n All your sites username and passwords are - \n ");
         scan_from_file();
         break;
     default:
