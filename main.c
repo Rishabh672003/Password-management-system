@@ -76,6 +76,7 @@ void file() {
     case 2:
         scan_from_file();
     default:
+        printf("Invalid Choice");
         break;
     };
 }
@@ -88,6 +89,8 @@ void pass_man() {
     output();
 }
 
+// this asks user infinite times if he or she or them want to add more sites or
+// exit the program
 void inf_loop_add_more() {
     while (1) {
         int add_more;
