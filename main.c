@@ -7,14 +7,6 @@ char website_name[100];
 char user_name[100];
 char password[100];
 
-int str_length(char str[]) {
-    int count;
-    // incrementing the count till the end of the string
-    for (count = 0; str[count] != '\0'; ++count)
-        ;
-    return count;
-}
-
 // function to get the data
 void add_data() {
     printf("\nEnter the site name - ");
