@@ -24,7 +24,7 @@ void add_data() {
     printf("Enter the password - ");
     scanf("\n%99s", password);
     for (;;) {
-        while (str_length(password) < 4) {
+        while (strlen(password) <= 4) {
             printf("\n Your Password is too short \n");
             printf("Enter Password again -");
             scanf("%s", password);
@@ -42,7 +42,7 @@ void output() {
 
 // store the data in the file using fprintf
 void output_to_file() {
-    FILE *file_ptr_a = fopen("/home/rishabh/Downloads/password.txt", "a");
+    FILE *file_ptr_a = fopen("password.txt", "a");
     if (file_ptr_a == NULL) {
         puts("this file doesnt exist");
         printf("create the file");
@@ -55,7 +55,7 @@ void output_to_file() {
 
 // read the data from the file
 void scan_from_file() {
-    FILE *file_ptr_r = fopen("/home/rishabh/Downloads/password.txt", "r");
+    FILE *file_ptr_r = fopen("password.txt", "r");
     char buff[255]; // creating char array to store data of file  
     while (fscanf(file_ptr_r, "\n%s", buff) != EOF) {
         printf("%s\n", buff);
@@ -67,7 +67,7 @@ void scan_from_file() {
 void pass_man() {
     add_data();
     // should be cls instead of clear for windows
-    system("clear");
+    system("cls");
     output();
     output_to_file();
 }
@@ -97,9 +97,12 @@ int main() {
         "-------------------------------------------------------------------\n");
     printf("This is a password management system which will store your usernames"
            "and passwords\n");
-    printf("Do you Enter the passwords in the manager or see your passwords?\n");
-    printf("Enter 1 if you want to store your passwords and 2 if you want to see "
-           "your passwords - ");
+    printf("Do you want enter the passwords in the manager or see your "
+           "passwords?\n");
+    printf(
+        "Enter 1 if you want to store your passwords\nEnter 2 if you want to see "
+        "your passwords \nEnter 3 if you want to remove the file in which your "
+        "password is saved - ");
     int num;
     scanf("%i", &num);
     switch (num) {
@@ -110,6 +113,18 @@ int main() {
     case 2:
         printf("\n All your sites username and passwords are - \n ");
         scan_from_file();
+        break;
+    case 3:
+        printf("Warning this will remove the password file in which all your "
+               "password are stored");
+        printf("Press y to proceed - ");
+        char ps[2];
+        scanf("%s", ps);
+        if (strcmp(ps, "y") == 0) {
+            system("del password.txt");
+            break;
+        }
+        printf("The password file has been deleted");
         break;
     default:
         printf("Invalid Choice");
