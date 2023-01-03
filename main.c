@@ -48,6 +48,11 @@ void output_to_file() {
 // read the data from the file
 void scan_from_file() {
     FILE *file_ptr_r = fopen("password.txt", "r");
+    if (file_ptr_r == NULL) {
+        puts("The password file hasnt been created, Create it by rerunning your "
+             "program");
+        exit(0);
+    }
     char buff[255]; // creating char array to store data of file  
     while (fscanf(file_ptr_r, "\n%s", buff) != EOF) {
         printf("%s\n", buff);
@@ -69,13 +74,21 @@ void pass_man() {
 void inf_loop_add_more() {
     while (1) {
         int add_more;
-        printf("\nEnter 1 if you want to add more passwords and 2 if you want to "
-               "exit - ");
+        printf(
+            "\nEnter 1 if you want to add more passwords\nEnter 2 if you want to "
+            "see the passwords entered\nEnter 3 if you want to exit\n - ");
         scanf("%i", &add_more);
         if (add_more == 1) {
             pass_man();
             continue;
+        } else if (add_more == 2) {
+            scan_from_file();
+            goto a;
+        } else {
+            exit(0);
         }
+a:
+        inf_loop_add_more();
         break;
     }
 }
@@ -88,13 +101,14 @@ int main() {
     printf(
         "-------------------------------------------------------------------\n");
     printf("This is a password management system which will store your usernames"
-           "and passwords\n");
-    printf("Do you want enter the passwords in the manager or see your "
+           " and passwords for any site you enter\n");
+    printf("Do you want enter the passwords or see your "
            "passwords?\n");
     printf(
-        "Enter 1 if you want to store your passwords\nEnter 2 if you want to see "
+        "\nEnter 1 if you want to store your passwords\nEnter 2 if you want to "
+        "see "
         "your passwords \nEnter 3 if you want to remove the file in which your "
-        "password is saved - ");
+        "password is saved\nEnter 4 if you want to exit\n- ");
     int num;
     scanf("%i", &num);
     switch (num) {
@@ -118,6 +132,8 @@ int main() {
         }
         printf("The password file has been deleted");
         break;
+    case 4:
+        exit(0);
     default:
         printf("Invalid Choice");
         break;
