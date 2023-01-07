@@ -63,8 +63,8 @@ void scan_from_file() {
 // execute the previous functions
 void pass_man() {
     add_data();
-    // should be cls instead of clear for windows
-    system("cls");
+    // should be clear instead of clear for windows
+    system("clear");
     output();
     output_to_file();
 }
@@ -126,7 +126,7 @@ int main() {
         char ps[2];
         scanf("%s", ps);
         if (strcmp(ps, "y") == 0) {
-            system("del password.txt");
+            system("rm password.txt");
             break;
         }
         printf("The password file has been deleted");
