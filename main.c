@@ -42,6 +42,7 @@ void output_to_file() {
     fprintf(file_ptr_a, "\nSite-%s\n", website_name);
     fprintf(file_ptr_a, "Username-%s\n", user_name);
     fprintf(file_ptr_a, "Password-%s\n", password);
+    fprintf(file_ptr_a, " \n");
     fclose(file_ptr_a);
 }
 
@@ -63,7 +64,6 @@ void scan_from_file() {
 // execute the previous functions
 void pass_man() {
     add_data();
-    // should be cls instead of clear for windows
     system("cls");
     output();
     output_to_file();
@@ -76,12 +76,14 @@ void inf_loop_add_more() {
         int add_more;
         printf(
             "\nEnter 1 if you want to add more passwords\nEnter 2 if you want to "
-            "see the passwords entered\nEnter 3 if you want to exit\n - ");
+            "see the passwords entered\nEnter 3 if you want to exit\n- ");
         scanf("%i", &add_more);
         if (add_more == 1) {
             pass_man();
             continue;
         } else if (add_more == 2) {
+            printf("All your password and usernames are as follows");
+            printf("\n");
             scan_from_file();
             goto a;
         } else {
