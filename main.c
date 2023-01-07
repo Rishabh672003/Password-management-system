@@ -50,9 +50,11 @@ void output_to_file() {
 void scan_from_file() {
     FILE *file_ptr_r = fopen("password.txt", "r");
     if (file_ptr_r == NULL) {
-        puts("The password file hasnt been created, Create it by rerunning your "
+        puts("\nThe password file hasnt been created, Create it by re-running the "
              "program");
         exit(0);
+    } else {
+        printf("\n All your sites username and passwords are - \n ");
     }
     char buff[255]; // creating char array to store data of file  
     while (fscanf(file_ptr_r, "\n%s", buff) != EOF) {
@@ -89,7 +91,7 @@ void inf_loop_add_more() {
         } else {
             exit(0);
         }
-        a:inf_loop_add_more();
+        a: inf_loop_add_more();
         break;
     }
 }
@@ -118,22 +120,24 @@ int main() {
         inf_loop_add_more();
         break;
     case 2:
-        printf("\n All your sites username and passwords are - \n ");
         scan_from_file();
         break;
     case 3:
         printf("Warning this will remove the password file in which all your "
                "password are stored");
-        printf("Press y to proceed - ");
+        printf("Press y to proceed or anything else to not proceed - ");
         char ps[2];
         scanf("%s", ps);
         if (strcmp(ps, "y") == 0) {
             system("del password.txt");
+            printf("The password file has been deleted");
             break;
+        } else {
+            printf("Password file has been left untouched");
         }
-        printf("The password file has been deleted");
         break;
     case 4:
+        printf("Hope this program was useful to you");
         exit(0);
     default:
         printf("Invalid Choice");
