@@ -131,7 +131,7 @@ int main() {
         if (strcmp(ps, "y") == 0) {
             system("del password.txt");
             printf("The password file has been deleted");
-            break;
+            exit(0);
         } else {
             printf("Password file has been left untouched");
         }
