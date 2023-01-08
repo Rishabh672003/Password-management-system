@@ -7,7 +7,8 @@ char website_name[100];
 char user_name[100];
 char password[100];
 
-// function to get the data
+// function to get the data by just using printf and scanf and will only accept
+// password if its greater than 4
 void add_data() {
     printf("\nEnter the site name - ");
     scanf("%99s", website_name);
@@ -25,14 +26,15 @@ void add_data() {
     }
 }
 
-// output the data recieved in stdout
+// output the data recieved in stdout so that user can see wt they typed
 void output() {
     printf("The Site name is - %s\n", website_name);
     printf("The User name is - %s\n", user_name);
     printf("The password is - %s\n", password);
 }
 
-// store the data in the file using fprintf
+// store the data in the file using fprintf in a file called password in the
+// same folder also creates that file if its not created
 void output_to_file() {
     FILE *file_ptr_a = fopen("password.txt", "a");
     if (file_ptr_a == NULL) {
@@ -42,11 +44,10 @@ void output_to_file() {
     fprintf(file_ptr_a, "\nSite-%s\n", website_name);
     fprintf(file_ptr_a, "Username-%s\n", user_name);
     fprintf(file_ptr_a, "Password-%s\n", password);
-    fprintf(file_ptr_a, " \n");
     fclose(file_ptr_a);
 }
 
-// read the data from the file
+// read the data from the file using scanf
 void scan_from_file() {
     FILE *file_ptr_r = fopen("password.txt", "r");
     if (file_ptr_r == NULL) {
@@ -55,15 +56,17 @@ void scan_from_file() {
         exit(0);
     } else {
         printf("\n All your sites username and passwords are - \n ");
+        printf("--------------------------------------------------------------");
+        char line[1000];
+        while (fgets(line, 1000, file_ptr_r)) {
+            printf("%s", line);
+        }
+        printf("--------------------------------------------------------------");
     }
-    char buff[255]; // creating char array to store data of file  
-    while (fscanf(file_ptr_r, "\n%s", buff) != EOF) {
-        printf("%s\n", buff);
-    }
-    fclose(file_ptr_r);
 }
 
-// execute the previous functions
+// this is the function that executes all the functions about collecting data
+// and then outputing to the file and stdout
 void pass_man() {
     add_data();
     system("cls");
@@ -72,7 +75,7 @@ void pass_man() {
 }
 
 // this asks user infinite times if he or she or them want to add more sites or
-// exit the program
+// exit the program or see the password they have typed
 void inf_loop_add_more() {
     while (1) {
         int add_more;
@@ -123,6 +126,7 @@ int main() {
         scan_from_file();
         break;
     case 3:
+        // removing the passord file
         printf("Warning this will remove the password file in which all your "
                "password are stored");
         printf("Press y to proceed or anything else to not proceed - ");
