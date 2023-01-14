@@ -141,14 +141,14 @@ int main() {
         printf("Warning!! this will remove the password file in which all your "
                "passwords are stored");
         printf("Press y to proceed or anything else to exit - ");
-        char ps[2];
+        char ps[1];
         scanf("%s", ps);
         if (strcmp(ps, "y") == 0) {
             system("del password.txt");
             printf("The password file has been deleted");
             exit(0);
         } else {
-            printf("Password file has been left untouched");
+            printf("Password file has not been deleted ");
         }
         break;
     case 4:
