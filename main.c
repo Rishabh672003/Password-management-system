@@ -17,7 +17,7 @@ void add_data() {
     printf("Enter the password - ");
     scanf("\n%99s", password);
     for (;;) {
-        while (strlen(password) <= 4) {
+        while (strlen(password) <= 7) {
             printf("\n\t\tYour Password is too short \n");
             printf("Enter Password again -");
             scanf("%s", password);
@@ -26,7 +26,7 @@ void add_data() {
     }
 }
 
-// output the data recieved in stdout so that user can see wt they typed
+// output the data recieved in stdout so that user can see what they typed
 void output() {
     printf("The Site name is - %s\n", website_name);
     printf("The User name is - %s\n", user_name);
@@ -38,7 +38,7 @@ void output() {
 void output_to_file() {
     FILE *file_ptr_a = fopen("password.txt", "a");
     if (file_ptr_a == NULL) {
-        puts("this file doesnt exist");
+        printf("this file doesnt exist");
         printf("create the file");
     }
     fprintf(file_ptr_a, "\nSite-%s\n", website_name);
