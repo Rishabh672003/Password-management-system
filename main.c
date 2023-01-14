@@ -13,12 +13,12 @@ void add_data() {
     printf("\nEnter the site name - ");
     scanf("%99s", website_name);
     printf("Enter the User name - ");
-    scanf("%s", user_name);
+    scanf("\n%99s", user_name);
     printf("Enter the password - ");
     scanf("\n%99s", password);
     for (;;) {
         while (strlen(password) <= 4) {
-            printf("\n Your Password is too short \n");
+            printf("\n\t\tYour Password is too short \n");
             printf("Enter Password again -");
             scanf("%s", password);
         }
@@ -51,17 +51,20 @@ void output_to_file() {
 void scan_from_file() {
     FILE *file_ptr_r = fopen("password.txt", "r");
     if (file_ptr_r == NULL) {
-        puts("\nThe password file hasnt been created, Create it by re-running the "
+        puts("\nThe password file hasnt been created, Create it by re-running "
+             "the "
              "program");
         exit(0);
     } else {
-        printf("\n All your sites username and passwords are - \n ");
-        printf("--------------------------------------------------------------");
+        printf("\nAll your sites username and passwords are - \n");
+        printf(
+            "--------------------------------------------------------------");
         char line[1000];
         while (fgets(line, 1000, file_ptr_r)) {
             printf("%s", line);
         }
-        printf("--------------------------------------------------------------");
+        printf(
+            "--------------------------------------------------------------");
     }
 }
 
@@ -79,9 +82,9 @@ void pass_man() {
 void inf_loop_add_more() {
     while (1) {
         int add_more;
-        printf(
-            "\nEnter 1 if you want to add more passwords\nEnter 2 if you want to "
-            "see the passwords entered\nEnter 3 if you want to exit\n- ");
+        printf("\nEnter 1 if you want to add more passwords\nEnter 2 if you "
+               "want to "
+               "see the passwords entered\nEnter 3 if you want to exit\n- ");
         scanf("%i", &add_more);
         if (add_more == 1) {
             pass_man();
@@ -94,20 +97,22 @@ void inf_loop_add_more() {
         } else {
             exit(0);
         }
-        a: inf_loop_add_more();
+    a:
+        inf_loop_add_more();
         break;
     }
 }
 
 int main() {
+    printf("-------------------------------------------------------------------"
+           "\n");
+    printf("                  PASSWORD MANAGEMENT SYSTEM                       "
+           "\n");
+    printf("-------------------------------------------------------------------"
+           "\n");
     printf(
-        "-------------------------------------------------------------------\n");
-    printf(
-        "                  PASSWORD MANAGEMENT SYSTEM                       \n");
-    printf(
-        "-------------------------------------------------------------------\n");
-    printf("This is a password management system which will store your usernames"
-           " and passwords for any site you enter\n");
+        "This is a password management system which will store your usernames"
+        " and passwords for any site you enter\n");
     printf("Do you want enter the passwords or see your "
            "passwords?\n");
     printf(
