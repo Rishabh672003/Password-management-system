@@ -41,26 +41,32 @@ void output_to_file() {
         printf("this file doesnt exist");
         printf("create the file");
     }
+    // fprintf puts text inside the file
+    // here the website name and everything will go to the file
+    // nothing gets printed on stdout
+    // only used for putting stuff in file
+    // yes
     fprintf(file_ptr_a, "\nSite-%s\n", website_name);
     fprintf(file_ptr_a, "Username-%s\n", user_name);
     fprintf(file_ptr_a, "Password-%s\n", password);
+    // this closes the file from the memory
     fclose(file_ptr_a);
 }
 
 // read the data from the file using scanf
+// will put everything from the file into stdout
 void scan_from_file() {
     FILE *file_ptr_r = fopen("password.txt", "r");
     if (file_ptr_r == NULL) {
-        puts("\nThe password file hasnt been created, Create it by re-running "
-             "the "
-             "program");
+        printf("\nThe password file hasn't been created, Create it by "
+               "re-running the program");
         exit(0);
     } else {
         printf("\nAll your sites username and passwords are - \n");
         printf(
             "--------------------------------------------------------------");
-        char line[1000];
-        while (fgets(line, 1000, file_ptr_r)) {
+        char line[10000];
+        while (fgets(line, 10000, file_ptr_r)) {
             printf("%s", line);
         }
         printf(
@@ -83,14 +89,13 @@ void inf_loop_add_more() {
     while (1) {
         int add_more;
         printf("\nEnter 1 if you want to add more passwords\nEnter 2 if you "
-               "want to "
-               "see the passwords entered\nEnter 3 if you want to exit\n- ");
+               "want to see the passwords entered\nEnter anything else if you "
+               "want to exit\n- ");
         scanf("%i", &add_more);
         if (add_more == 1) {
             pass_man();
             continue;
         } else if (add_more == 2) {
-            printf("All your password and usernames are as follows");
             printf("\n");
             scan_from_file();
             goto a;
@@ -122,7 +127,8 @@ int main() {
         "password is saved\nEnter 4 if you want to exit\n- ");
     int num;
     scanf("%i", &num);
-    switch (num) {
+    switch (num) 
+    {
     case 1:
         pass_man();
         inf_loop_add_more();
@@ -132,9 +138,9 @@ int main() {
         break;
     case 3:
         // removing the passord file
-        printf("Warning this will remove the password file in which all your "
-               "password are stored");
-        printf("Press y to proceed or anything else to not proceed - ");
+        printf("Warning!! this will remove the password file in which all your "
+               "passwords are stored");
+        printf("Press y to proceed or anything else to exit - ");
         char ps[2];
         scanf("%s", ps);
         if (strcmp(ps, "y") == 0) {
