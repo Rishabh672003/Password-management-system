@@ -41,15 +41,9 @@ void output_to_file() {
         printf("this file doesnt exist");
         printf("create the file");
     }
-    // fprintf puts text inside the file
-    // here the website name and everything will go to the file
-    // nothing gets printed on stdout
-    // only used for putting stuff in file
-    // yes
     fprintf(file_ptr_a, "\nSite-%s\n", website_name);
     fprintf(file_ptr_a, "Username-%s\n", user_name);
     fprintf(file_ptr_a, "Password-%s\n", password);
-    // this closes the file from the memory
     fclose(file_ptr_a);
 }
 
@@ -127,8 +121,7 @@ int main() {
         "password is saved\nEnter 4 if you want to exit\n- ");
     int num;
     scanf("%i", &num);
-    switch (num) 
-    {
+    switch (num) {
     case 1:
         pass_man();
         inf_loop_add_more();
