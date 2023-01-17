@@ -72,7 +72,7 @@ void scan_from_file() {
 // and then outputing to the file and stdout
 void pass_man() {
     add_data();
-    system("cls");
+    system("clear");
     output();
     output_to_file();
 }
@@ -137,7 +137,7 @@ int main() {
         char ps[1];
         scanf("%s", ps);
         if (strcmp(ps, "y") == 0) {
-            system("del password.txt");
+            system("rm password.txt");
             printf("The password file has been deleted");
             exit(0);
         } else {
